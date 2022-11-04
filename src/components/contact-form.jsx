@@ -2,6 +2,12 @@ import React from "react";
 import { object, func } from "prop-types";
 
 export class ContactForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.props.onChange.bind(this);
+    this.fieldChange = this.fieldChange.bind(this);
+  }
   static defaultProps = {
     data: {
       name: "",
@@ -19,17 +25,12 @@ export class ContactForm extends React.Component {
     data: object.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * When form is submitted forward contact data to parent
    * @param {event} DOMEvent
    */
   handleSubmit(event) {
     event.preventDefault();
-
     this.props.onSubmit(this.props.data);
   }
 
@@ -54,7 +55,7 @@ export class ContactForm extends React.Component {
     let data = this.props.data;
 
     return (
-      <form onSubmit={this.props.onSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <h3>Contact Form</h3>
 
         <div className="form-group">

@@ -7,7 +7,7 @@ export class App extends React.Component {
   CONTACT_FORM_DEFAULTS = {
     name: "",
     email: "",
-    option: "A",
+    option: "",
     select: "",
     type: "",
     message: "",
