@@ -8,7 +8,7 @@ export class App extends React.Component {
     name: "",
     email: "",
     option: "A",
-    select: 1,
+    select: "",
     type: "",
     message: "",
   };
@@ -37,8 +37,8 @@ export class App extends React.Component {
   logIn = () => {
     this.setState({
       currentUser: {
-        name: "Test User",
-        email: "user@example.com",
+        name: "",
+        email: "",
       },
     });
   };

@@ -6,8 +6,8 @@ export class ContactForm extends React.Component {
     data: {
       name: "",
       email: "",
-      option: 1,
-      select: "",
+      option: undefined,
+      select: undefined,
       message: "Test message",
       terms: false,
     },
@@ -58,24 +58,24 @@ export class ContactForm extends React.Component {
 
         <div className="form-group">
           <label className="form-label">Your Name:</label>
-          <input name="name" className="form-control" onChange={(value) => this.props.onChange(value)} value={data.name} />
+          <input name="name" className="form-control" onChange={(e) => this.props.onChange(e)} value={data.name} />
         </div>
 
         <div className="form-group">
           <label className="form-label">Your Best Email:</label>
-          <input name="email" className="form-control" onChange={(value) => this.props.onChange(value)} value={data.email} />
+          <input name="email" className="form-control" onChange={(e) => this.props.onChange(e)} value={data.email} />
         </div>
 
         <label className="form-label">Select your membership option:</label>
         <div className="form-group row">
           <label className="form-label col-xs-4">
-            <input type="radio" name="option" value="A" checked={data.checked} /> Option A
+            <input type="radio" name="option" value="A" checked={data.option ? data.option : undefined} onChange={(e) => this.props.onChange(e)} /> Option A
           </label>
           <label className="form-label col-xs-4">
-            <input type="radio" name="option" value="B" checked={data.checked} /> Option B
+            <input type="radio" name="option" value="B" checked={data.option} onChange={(e) => this.props.onChange(e)} /> Option B
           </label>
           <label className="form-label col-xs-4">
-            <input type="radio" name="option" value="C" checked={data.checked} /> Option C
+            <input type="radio" name="option" value="C" checked={data.option} onChange={(e) => this.props.onChange(e)} /> Option C
           </label>
         </div>
 
@@ -83,21 +83,25 @@ export class ContactForm extends React.Component {
 
         <div className="form-group">
           <label className="form-label">What can we help you with:</label>
-          {/* <Select {...this.options} value={this.options.filter((option) => option.label === "Some label")} onChange={(value) => this.props.onChange(value)} onBlur={() => data.input.onBlur(data.input.value)} options={data.options} placeholder={data.placeholder} /> */}
-          <select className="form-control" name="select" onChange={(value) => this.props.onChange(value)} onBlur={() => this.props.onBlur(data.input.value)}>
-            <option value={data.select}>I have question about my membership</option>
+          <select className="form-control" name="select" value={data.select} onChange={(e) => this.props.onChange(e)}>
+            {/* <option value={data.select}>I have question about my membership</option> */}
+            {this.options.map((value) => (
+              <option key={value.id} value={value.id}>
+                {value.label}
+              </option>
+            ))}
           </select>
         </div>
 
         <div className="form-group">
           <label className="form-label">Message:</label>
-          <textarea name="message" rows="10" placeholder="Please type your question here" className="form-control" onChange={(value) => this.props.onChange(value)} value={data.message} />
+          <textarea name="message" rows="10" placeholder="Please type your question here" className="form-control" onChange={(e) => this.props.onChange(e)} value={data.message} />
         </div>
 
         <div className="form-group">
           <label className="form-label">
             {" "}
-            <input type="checkbox" name="terms" value={data.terms} /> I agree to terms and conditions{" "}
+            <input type="checkbox" name="terms" onChange={(e) => this.props.onChange(e)} value={data.terms} /> I agree to terms and conditions{" "}
           </label>
         </div>
 
