@@ -36,6 +36,7 @@ export class ContactForm extends React.Component {
   fieldChange(event) {
     let target = event.target;
     let value = target.type === "checkbox" ? target.checked : target.value;
+    return value;
   }
 
   isSelected(key, option) {
@@ -58,7 +59,7 @@ export class ContactForm extends React.Component {
 
         <div className="form-group">
           <label className="form-label">Your Name:</label>
-          <input name="name" className="form-control" onChange={(e) => this.props.onChange(e)} value={data.name} />
+          <input name="name" className="form-control" onChange={(e) => this.fieldChange(e)} value={data.name} />
         </div>
 
         <div className="form-group">
@@ -72,10 +73,10 @@ export class ContactForm extends React.Component {
             <input type="radio" name="option" value="A" checked={data.option ? data.option : undefined} onChange={(e) => this.props.onChange(e)} /> Option A
           </label>
           <label className="form-label col-xs-4">
-            <input type="radio" name="option" value="B" checked={data.option} onChange={(e) => this.props.onChange(e)} /> Option B
+            <input type="radio" name="option" value="B" checked={data.option ? data.option : undefined} onChange={(e) => this.props.onChange(e)} /> Option B
           </label>
           <label className="form-label col-xs-4">
-            <input type="radio" name="option" value="C" checked={data.option} onChange={(e) => this.props.onChange(e)} /> Option C
+            <input type="radio" name="option" value="C" checked={data.option ? data.option : undefined} onChange={(e) => this.props.onChange(e)} /> Option C
           </label>
         </div>
 
@@ -84,7 +85,6 @@ export class ContactForm extends React.Component {
         <div className="form-group">
           <label className="form-label">What can we help you with:</label>
           <select className="form-control" name="select" value={data.select} onChange={(e) => this.props.onChange(e)}>
-            {/* <option value={data.select}>I have question about my membership</option> */}
             {this.options.map((value) => (
               <option key={value.id} value={value.id}>
                 {value.label}
